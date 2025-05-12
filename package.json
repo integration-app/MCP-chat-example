@@ -1,0 +1,22 @@
+{
+  "name": "langagent",
+  "version": "1.0.0",
+  "description": "This is a chat application that uses LangGraph to create an AI agent that can interact with an MCP server. The agent uses Claude 3 Sonnet as the underlying language model and can access tools provided by the MCP server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@langchain/anthropic": "^0.3.20",
+    "@langchain/core": "^0.3.55",
+    "@langchain/langgraph": "^0.2.71",
+    "@langchain/mcp-adapters": "^0.4.2",
+    "@langchain/openai": "^0.5.10",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
+}
