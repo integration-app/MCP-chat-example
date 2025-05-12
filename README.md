@@ -1,9 +1,9 @@
 # AI Chat Agent (Example MCP Client)
 
-This project provides a chat interface that connects to an MCP (Model Control Protocol) SSE server, allowing you to interact with AI models through a user-friendly web interface. The agent uses Anthropic's Claude as the underlying language model and can access tools provided by your MCP server.
+This project provides a chat interface that connects to an [MCP (Model Control Protocol)]((https://modelcontextprotocol.io/introduction) SSE server, allowing you to interact with AI models through a user-friendly web interface. The agent uses Anthropic's Claude as the underlying language model and can access tools provided by your MCP server.
 
 See here for instructions to implement a remote Integration App MCP Server:
-- Remote MCP Server (SSE or Streamable HTTP)
+- [Remote MCP Server (SSE or Streamable HTTP)]([url](https://github.com/integration-app/mcpservice)
 
 ## Prerequisites
 
@@ -35,14 +35,14 @@ LLM_MODEL=claude-3-opus-20240229   #or preferred model
 ```
 
 ### Agent Architecture
-The agent is built using Langchain's graph-based architecture:
+The agent is built using [Langchain's agent framework](https://github.com/langchain-ai/langchainjs-mcp-adapters):
 1. **Input Processing**: User messages are processed through the chat interface
 2. **Tool Selection**: The agent uses Langgraph to determine which MCP tools to use
 3. **Execution**: Selected tools are executed through the MCP adapter
 4. **Response Generation**: The LLM generates responses based on tool outputs
 
 ### MCP Integration
-The project uses the Langchain MCP adapter to:
+The project uses the [Langchain MCP adapter](https://github.com/langchain-ai/langchainjs-mcp-adapters) to:
 - Connect to your MCP server
 - Discover available tools
 - Execute tool calls
@@ -84,6 +84,11 @@ node agent.js
 ```
 http://localhost:3000
 ```
+
+Ask the agent to list available tools, and it will show you the tools that are configured in your workspace:
+<img width="886" alt="Screenshot 2025-05-12 at 4 09 30 PM" src="https://github.com/user-attachments/assets/18aa3371-e6a1-4576-9968-bb2c7f955dcf" />
+
+
 
 ## Features
 
