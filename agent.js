@@ -47,7 +47,8 @@ if (llmProvider === "anthropic") {
 const mcpServers = {
   main: {
     transport: "sse",
-    url: "https://mcp-sse-03ad87b9bdee.herokuapp.com/sse?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZWE4ZDk1YzIxOWRiNWVjNjJjOTQ3NCIsImlzcyI6ImY4OGY1MmJjLTU3YTktNDdlMy05M2IzLTg0M2ZhMGRkNTcwOCIsImV4cCI6MTc3NTEzNDg3MH0.440grQgTeHaENfkMPwAAgb-4Cyd2sdraQG3q1njy4kc",
+    url: "https://mcp-sse-03ad87b9bdee.herokuapp.com/sse?token=YOUR_TOKEN_HERE",
+    //replace YOUR_TOKEN_HERE with your actual Integration App Token
   },
   // Add more servers here if needed
 };
