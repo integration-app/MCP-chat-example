@@ -1,4 +1,4 @@
-# LangAgent - MCP Chat Interface
+# AI Chat Agent (Example MCP Client)
 
 This project provides a chat interface that connects to an MCP (Model Control Protocol) SSE server, allowing you to interact with AI models through a user-friendly web interface. The agent uses Anthropic's Claude as the underlying language model and can access tools provided by your MCP server.
 
