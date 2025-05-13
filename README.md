@@ -1,13 +1,16 @@
 # AI Chat Agent (Example MCP Client)
 
-This project provides a chat interface that connects to an [MCP (Model Control Protocol)]((https://modelcontextprotocol.io/introduction) SSE server, allowing you to interact with AI models through a user-friendly web interface. The agent uses Anthropic's Claude as the underlying language model and can access tools provided by your MCP server.
+This project provides a chat interface that connects to an [MCP (Model Control Protocol)](https://modelcontextprotocol.io/introduction) SSE server, allowing you to interact with AI models through a user-friendly web interface. The agent uses Anthropic's Claude as the underlying language model and can access tools provided by your MCP server.
+
+To use with our SSE-based implementation of the MCP server, first follow the instructions here:
+- [Integration App MCP Server (SSE)](https://github.com/integration-app/mcpservice)
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
 - Node.js (v18 or higher)
 - npm (comes with Node.js)
-- An MCP server running and accessible 
+- An MCP server running and accessible
 - An Anthropic API key (for Claude 3 Sonnet)
 
 ## Installation
