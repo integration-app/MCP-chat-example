@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Agent | Membrane</title>
+  <title>AI Agent | MCP Chat</title>
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -11,11 +11,11 @@
       padding: 20px;
       background-color: #080a1e;
       color: white;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      justify-content: flex-start;
     }
 
     h1 {
@@ -150,15 +150,133 @@
       0%, 60%, 100% { transform: translateY(0); }
       30% { transform: translateY(-4px); }
     }
+
+    .main-layout {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      gap: 24px;
+      position: relative;
+    }
+    .chat-container {
+      width: 100%;
+      max-width: 600px;
+      min-width: 350px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #0f152f;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 2px solid white;
+    }
+    .main-layout > .chat-container {
+      flex: 0 0 auto;
+      align-self: center;
+    }
+    .main-layout > .tools-panel {
+      flex: 0 0 auto;
+      align-self: flex-start;
+    }
+    .chat-container > #chat {
+      width: 100%;
+    }
+    .input-container {
+      width: 100%;
+    }
+    .tools-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 240px;
+      max-width: 320px;
+      margin-left: 0;
+    }
+    .tools-label {
+      margin-bottom: 8px;
+      text-align: center;
+      width: 100%;
+    }
+    .tools-label h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+    }
+    .tools-menu {
+      background: #181c36;
+      border-radius: 10px;
+      padding: 20px;
+      color: #fff;
+      border: 2px solid #4a90e2;
+      height: 440px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .tools-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tools-menu li {
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      background: #232857;
+      border-radius: 6px;
+      font-size: 15px;
+      word-break: break-word;
+    }
+    @media (max-width: 900px) {
+      .main-layout {
+        flex-direction: column;
+        gap: 0;
+        align-items: center;
+      }
+      .tools-panel {
+        margin-left: 0;
+        width: 100%;
+        max-width: 100%;
+      }
+      .tools-menu {
+        height: auto;
+      }
+      .chat-container {
+        align-items: stretch;
+      }
+    }
+    .center-outer {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
-  <h1>AI Agent | Membrane</h1>
-  <div class="chat-container">
-    <div id="chat"></div>
-    <div class="input-container">
-      <input type="text" id="input" placeholder="Type your message...">
-      <button onclick="sendMessage()">Send</button>
+  <h1>AI Agent | MCP Chat</h1>
+  <div class="center-outer">
+    <div class="main-layout">
+      <div class="chat-container">
+        <div id="chat"></div>
+        <div class="input-container">
+          <input type="text" id="input" placeholder="Type your message...">
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+      <div class="tools-panel">
+        <div class="tools-label"><h2>Available Tools</h2></div>
+        <div class="tools-menu">
+          <ul id="tools-list">
+            <li>Loading tools...</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -166,9 +284,10 @@
     const chatDiv = document.getElementById('chat');
     const input = document.getElementById('input');
 
-    // Add initial welcome message
+    // On page load, show greeting
     window.onload = function() {
       appendMessage("Hello! I can use tools powered by Integration App. How can I help?", false);
+      fetchTools();
     };
 
     function appendMessage(message, isUser) {
@@ -204,7 +323,9 @@
       try {
         const response = await fetch('/chat', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({ message }),
         });
         const data = await response.json();
@@ -227,6 +348,40 @@
     input.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') sendMessage();
     });
+
+    // Fetch and display tools
+    async function fetchTools() {
+      const toolsList = document.getElementById('tools-list');
+      try {
+        const res = await fetch('/tools');
+        const data = await res.json();
+        toolsList.innerHTML = '';
+        if (data.tools && Object.keys(data.tools).length > 0) {
+          Object.entries(data.tools).forEach(([connection, tools]) => {
+            const section = document.createElement('li');
+            section.style.listStyle = 'none';
+            section.style.marginBottom = '8px';
+            section.style.background = 'none';
+            section.style.padding = '0';
+            section.style.fontWeight = 'bold';
+            section.style.fontSize = '16px';
+            section.style.color = '#fff';
+            section.textContent = connection + ':';
+            toolsList.appendChild(section);
+            tools.forEach(tool => {
+              const li = document.createElement('li');
+              li.style.marginLeft = '16px';
+              li.innerHTML = '🛠️ ' + '<span>' + tool.name + '</span>';
+              toolsList.appendChild(li);
+            });
+          });
+        } else {
+          toolsList.innerHTML = '<li>No tools available.</li>';
+        }
+      } catch (e) {
+        toolsList.innerHTML = '<li>Error loading tools.</li>';
+      }
+    }
   </script>
 </body>
 </html> 
