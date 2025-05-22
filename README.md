@@ -3,7 +3,7 @@
 This project provides a chat interface that connects to an MCP (Model Control Protocol) SSE server, allowing you to interact with AI models through a user-friendly web interface. The agent uses Anthropic's Claude as the underlying language model and can access tools provided by your MCP server.
 
 See here for instructions to implement a remote Integration App MCP Server:
-- Remote MCP Server (SSE or Streamable HTTP)
+- [MCP Server](https://github.com/integration-app/mcp-server)
 
 ## Prerequisites
 
