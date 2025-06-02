@@ -1,19 +1,21 @@
 # AI Chat Agent Example
 
-This is a template for an application showcasing integration capabilities using [Integration.app](https://integration.app). The app is built with Next.js and demonstrates how to implement user authentication and integration token generation, as well as an AI-powered chat agent that can use tools from an MCP server.
+This is a template for an application showcasing integration capabilities using [Integration.app](https://integration.app). The app is built with Next.js and demonstrates how to implement user authentication and  token generation, as well as an AI-powered chat agent that can use tools from an MCP server.
 
 ## Prerequisites
 
 - Node.js 18+ installed
 - Integration.app workspace credentials (Workspace Key and Secret)
+- LLM Credentials (Key and Model/Provider Name)
+- MCP Server access (See [here](https://github.com/integration-app/mcp-server) to run MCP Server)
 
 ## Setup
 
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/integration-app/MCP-chat-example
+cd MCP-chat-example
 ```
 
 2. Install dependencies:
@@ -67,13 +69,11 @@ yarn dev
 - `/src/lib` - Utility functions and helpers (including MCP agent logic)
 - `/public` - Static assets
 
-## Template Features
-
 ### Authentication
 
-The template implements a simple authentication mechanism using a randomly generated UUID as the customer ID. This simulates a real-world scenario where your application would have proper user authentication. The customer ID is used to:
+The template implements a simple authentication mechanism using a randomly generated UUID as the customer ID. This simulates a real-world scenario where your application can authentication users to provide the agent access to tools in their own personal accounts on external apps. The customer ID is used to:
 
-- Identify the user/customer in the integration platform
+- Identify the user/customer in the Integration.app workspace
 - Generate integration app tokens for external app connections
 
 ### AI Chat Agent
