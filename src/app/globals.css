@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+    }
+  }
+}
+
+@layer components {
+  a[href]:not([class]),
+  a[href^="/"]:not([class]) {
+    @apply underline hover:no-underline text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white;
+  }
+}
+
+html {
+  font-size: 18px;
+  font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, 'sans-serif';
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  min-height: 100vh;
+}
+
+body {
+  min-height: 100vh;
+  background: transparent;
+}
+
+.card {
+  @apply rounded-2xl shadow-xl bg-white dark:bg-gray-900 p-8;
+}
+
+/* Modern transitions for interactive elements */
+button, a, input, textarea {
+  transition: all 0.15s cubic-bezier(.4,0,.2,1);
+}
+
+/* Glassmorphism for chat */
+.glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+}
+
+/* Subtle hover for cards */
+.card-hover:hover {
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  transform: translateY(-2px) scale(1.01);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in {
+  animation: fade-in 0.7s cubic-bezier(.4,0,.2,1);
+}
